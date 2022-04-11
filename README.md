@@ -29,7 +29,7 @@ Node.js'i şu sebeplerden tercih edebilirsiniz:
 
 + Node.js, event loop/olay güdümlüdür. Aslında Javascript single-thread ve asenkron yapıda çalışan bir programlama dilidir. Javascript single-thread çalıştırma yaptığı için çalıştırdığı eventleri ve callbackleri sıraya sokarak hepsini tek bir thread ile işler. Bahsedilen eventlerin ve callbacklerin sırada tutulduğu yapı, basit bir kuyruk (Queue) mekanizmasıdır. Thread’in her defasında kuyruktaki ilk event’i işleyip yeni bir event alması da event loop olarak adlandırılır.
  
-+ Node.js, asenkron yapıdadır ve non blocking/bloklamasızdır. Asenkron programlamanın zıttı senkron programlamada kodlar sırayla işlenirler ve birbirlerini beklerler. Bir işlemin başlaması kendinden önceki satırdaki işlemin bitmesiyle gerçekleşir. Bu sebeple senkron programlamada aşağıdaki gibi bir kod yapısı işlemler birbirini bekleyeceği için toplamda 23 saniye bitecektir.
++ Node.js, asenkron yapıdadır ve non blocking/bloklamasızdır. Asenkron programlamanın zıttı senkron programlamada kodlar sırayla işlenirler ve birbirlerini beklerler. Bir işlemin başlaması kendinden önceki satırdaki işlemin bitmesiyle gerçekleşir. Bu sebeple senkron programlamada aşağıdaki gibi bir kod yapısı işlemler birbirini bekleyeceği için toplam bitiş süresi 23 saniye olacaktır.
 
 ```
 fonksiyon1();     -> 5 saniye sürüyor.
@@ -65,18 +65,19 @@ Node.js https://nodejs.org adresinden indirilir. Güncel olarak son sürüm olan
 
 ![node0](https://user-images.githubusercontent.com/101933251/162569648-a3a95578-ae91-4f9e-8f34-e91fa2ea7e16.JPG)
 
-Node.js indirildikten sonra artık JavaScript kodları makine üzerinde çalışır hale gelir. Node.js kodları ise Visual Studio Code veya diğer editörler üzerinden yazılabilir ve terminal tarafından çalıştırılabilir.
+Node.js indirildikten sonra artık JavaScript kodları makine üzerinde çalışır hale gelir ve terminalden uzantısı .js olan dosyalar çalıştırılabilir.
 
 ---
 
 ### 3. Node.js Yazımı ve Node.js Dosyası Çalıştırma
 
 Node.js, dil olarak Javascript'i kullanır ve yazdığınız tüm Javascript kodlarını çalıştırır. Ancak Node.js yazarken ES6 standartlarına uygun şekilde Javascript kodları yazmaya dikkat gösterin. (Eğer ES6 hakkında bilginiz yoksa Javascript ES6 üzerine bilgi edinin). 
+
 1. Node.js dosyalarının uzantısı .js'dir, bu sebepten Node.js ile çalışırken uzantısı .js olan dosyalar oluşturun. 
-2. Başlangıç olarak masaüstünde bir çalışma klasörü oluşturun ve içinde index.js isminde bir dosya oluşturun. 
-3. Oluşturduğunuz dosyayı Visual Studio Code gibi bir editörle açın. 
+2. Başlangıç olarak masaüstünde bir çalışma klasörü oluşturun ve içinde `index.js` isminde bir dosya oluşturun. 
+3. Oluşturduğunuz dosyayı Visual Studio Code gibi bir kod editörüyle açın. 
 4. Ardından index.js dosyası içine çalıştırmak istediğiniz Javascript kodlarını yazın. 
-5. Örnek olarak şu kodları yazdım ve siz de yazıp çalıştırabilirsiniz (Kodlar Javascript ES6 standartlarına uygun olarak yazılmıştır. `const` değişkeni kullanılmıştır ve ES6'da "Template Literals" olarak geçen, değişkenlerin değerlerini kullanmamızı sağlayan `${}` kullanılmıştır).
+5. Örnek olarak şu kodları yazdım ve siz de yazıp çalıştırabilirsiniz (Kodlar Javascript ES6 standartlarına uygun olarak yazılmıştır. `const` değişkeni kullanılmıştır ve ES6'da `Template Literals` olarak geçen, değişkenlerin değerlerini kullanmamızı sağlayan `${}` kullanılmıştır).
 
 ![node1](https://user-images.githubusercontent.com/101933251/162569735-155ed7f0-a6b7-43e2-baa9-c415950e2073.JPG)
 
@@ -94,11 +95,11 @@ const calisanBilgi = `Çalışanın adı ve soyadı ${calisan.isim + " " + calis
 console.log(calisanBilgi)
 ```
 
-Ardından yazdığınız kodları çalıştırmak için terminali açın ve önce `node`, ardından çalıştıracağınız dosyanın ismini `index.js` yazın:
+6. Ardından yazdığınız kodları çalıştırmak için terminali açın ve önce `node`, ardından çalıştıracağınız dosyanın ismi olan `index.js`'i yazın ve enter'a basın:
 
 ![node2](https://user-images.githubusercontent.com/101933251/162569154-9ead158e-3594-414d-be2b-b8f0adafd009.JPG)
 
-Bu komutun ardından node.js dosyanızı çalıştırır. Artık Javascript kodlarınız Node.js sayesinde konsolda da çalışıyor olacaktır:
+7- Bu komutun ardından Node.js dosyanızı çalıştıracaktır. Artık Javascript kodlarınız Node.js sayesinde konsolda da çalışıyor olacaktır:
 
 ![node3](https://user-images.githubusercontent.com/101933251/162569549-cc0937c5-7e71-4247-946f-4dec38126bb0.JPG)
 
@@ -106,14 +107,14 @@ Bu komutun ardından node.js dosyanızı çalıştırır. Artık Javascript kodl
 
 ### 4. Node.js Paket-Modül Kavramı
 
-Paket bir veya birden fazla Javascript dosyasına yazılmış, belli görev ve işlevleri yerine getiren kod blokları anlamına gelir ve modül olarak da adlandırılır. Her paketin kodları kendisi için oluşturulmuş klasörün içindeki dosyalarda tutulur. Node.js geliştiricileri başka geliştiricilerin yazmış oldukları paketleri kullanabilirler ya da kendi paketlerini de yazıp kullanabilirler. Geliştiriciler `Express.js` veya `Nodemon.js` gibi başka geliştiricilerin yazıp kullanıma sundukları paketleri -bu tür paketlere 3. parti yazılım diyoruz- kendi projelerinde kullanmak istedikleri zaman önce NPM denilen paket yöneticisi ile bu paketleri projelerine indirirler `npm install modüladi`, ardından indirdikleri paketin ismini bir değişkene atayıp `require()` ile çağırarak kullanırlar. Aşağıdaki kod projeye `Express.js` paketini dahil eder (Express.js'in projeye indirilmiş olması şartıyla).
+Paket bir veya birden fazla Javascript dosyasına yazılmış, belli görev ve işlevleri yerine getiren kod blokları anlamına gelir ve modül olarak da adlandırılır. Her paketin kodları kendisi için oluşturulmuş klasörün içindeki dosyalarda tutulur. Node.js geliştiricileri başka geliştiricilerin yazmış oldukları paketleri kullanabilirler ya da kendi paketlerini de yazıp kullanabilirler. Geliştiriciler `Express.js` veya `Nodemon.js` gibi başka geliştiricilerin yazıp kullanıma sundukları paketleri -bu tür paketlere 3. parti yazılım diyoruz- kendi uygulamalarında kullanmak istedikleri zaman önce NPM denilen paket yöneticisi ile bu paketleri uygulamalarına terminalden `npm install paketAdi` komutuyla indirirler, ardından indirdikleri paketi bir değişken oluşturup `require()` ile çağırarak kullanırlar. Aşağıdaki kod uygulamaya `Express.js` paketini dahil eder (Express.js'in uygulamaya indirilmiş olması şartıyla).
 
 `const express = require("express")`
 
 **Kendi Modülünü Yazmak**
 
-1. Kendi paketinizi yazıp kendi projenizde kullanmak istiyorsanız öncelikle paketi-kodu yazacağınız farklı bir .js uzantılı dosya açın. 
-2. Ardından yazdığınız kodları başka dosyalarda kullanmak için `module.exports = {}` kodunu kullanarak çıkartın. Aşağıdaki örnek yazılmış basit bir paketi ve nasıl export edildiğini gösterir.
+1. Kendi paketinizi yazıp kendi uygulamanızda kullanmak istiyorsanız öncelikle paketi-kodu yazacağınız farklı bir .js uzantılı dosya açın. 
+2. Ardından yazdığınız kod bloğunu çıkarmak için `module.exports = {}` kodunu kullanın. Aşağıdaki örnek yazılmış basit bir paketi ve nasıl export edildiğini gösterir.
 
 ![node6](https://user-images.githubusercontent.com/101933251/162572890-c2f65045-3bcf-4b6a-acd6-2b9586caba46.JPG)
 
@@ -129,7 +130,7 @@ module.exports = {
 
 `const sehirler = require("./myModule.js");`
 
-4. Şimdi kodu istediğiniz şekilde kullanın ve çalıştırın. Örnek olarak konsola yazdırın: 
+4. Şimdi kodu istediğiniz şekilde kullanın ve çalıştırın. Örnek olarak `console.log()` koduyla konsola yazdırın: 
 
 ![node7](https://user-images.githubusercontent.com/101933251/162572999-bdd56058-6fca-4387-9aa0-74a61df42db4.JPG)
 
@@ -160,9 +161,9 @@ querystring:	URL istekleri için kullanılır.
 util:	Çeşitli yardımcı fonksiyonları içerir.
 ```
 
-2- Yerel Modüller: İhtiyaçlara göre geliştiricinin kendi yazdığı modüllere denir. Geliştirici kendi yazdığı modülü bulunduğu dosyadan `module.exports = { moduleName }` koduyla çıkarıp başka dosyalarda kullanılabilir hale getirir. Bir önceki kısımda bunun bir örneğini gördük.
+2- Yerel Modüller: İhtiyaçlara göre geliştiricinin kendi yazdığı modüllere denir. Geliştirici kendi yazdığı modülü bulunduğu dosyadan `module.exports = { moduleName }` koduyla çıkarıp başka dosyalarda kullanabilir. Bir önceki kısımda bunun bir örneğini gördük.
 
-3- Üçüncü Parti Modüller: Geliştiriciler Node.js'nin çekirdek modüllerini yetersiz bulduğunda veya belli işlemler için belli kod bloklarına ihtiyaç duyduklarında bunları kendileri yazmak yerine başka geliştiricilerin yazıp açık kaynak kodlu olarak kullanıma sunduğu 3. parti yazılımları/modülleri kendi projelerine indirip kullanabilirler. Bunun için NPM dediğimiz paket yöneticisi kullanılır. Bu sayede uygulamanın yapım aşaması hızlanmış olur. 
+3- Üçüncü Parti Modüller: Geliştiriciler Node.js'nin çekirdek modüllerini yetersiz bulduğunda veya belli işlemler için belli kod bloklarına ihtiyaç duyduklarında bunları kendileri yazmak yerine başka geliştiricilerin yazıp açık kaynak kodlu olarak kullanıma sundukları 3. parti yazılımları/modülleri kendi uygulamalarına indirip kullanabilirler. Bunun için NPM dediğimiz paket yöneticisi kullanılır. Bu sayede uygulamanın yapım aşaması hızlanmış olur. 
 
 ---
 
